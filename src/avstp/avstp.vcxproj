@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9280ED7C-03D6-4BAF-988E-BC12992FF977}</ProjectGuid>
+    <RootNamespace>avstp</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Platform)'=='Win32'" Label="Configuration">
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'" Label="Configuration">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.60610.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)$(Configuration)$(Platform)\</OutDir>
+    <IntDir>$(Configuration)$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x86'">
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+    <Link>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;..\common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;AVSTP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\avisynth.h" />
+    <ClInclude Include="..\common\avstp.h" />
+    <ClInclude Include="..\common\AvstpFinder.h" />
+    <CustomBuild Include="..\common\AvstpWrapper.h">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSched.h">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSched.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSimple.h">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSimple.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTSlicer.h">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTSlicer.hpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </CustomBuild>
+    <ClInclude Include="..\common\fstb\AllocAlign.h" />
+    <ClInclude Include="..\common\fstb\AllocAlign.hpp" />
+    <ClInclude Include="..\common\fstb\def.h" />
+    <ClInclude Include="..\common\fstb\SingleObj.h" />
+    <ClInclude Include="..\common\fstb\SingleObj.hpp" />
+    <ClInclude Include="..\common\conc\AioAdd.h" />
+    <ClInclude Include="..\common\conc\AioAdd.hpp" />
+    <ClInclude Include="..\common\conc\AioMax.h" />
+    <ClInclude Include="..\common\conc\AioMax.hpp" />
+    <ClInclude Include="..\common\conc\AioSub.h" />
+    <ClInclude Include="..\common\conc\AioSub.hpp" />
+    <ClInclude Include="..\common\conc\Array.h" />
+    <ClInclude Include="..\common\conc\Array.hpp" />
+    <ClInclude Include="..\common\conc\AtomicInt.h" />
+    <ClInclude Include="..\common\conc\AtomicInt.hpp" />
+    <ClInclude Include="..\common\conc\AtomicIntOp.h" />
+    <ClInclude Include="..\common\conc\AtomicIntOp.hpp" />
+    <ClInclude Include="..\common\conc\AtomicMem.h" />
+    <ClInclude Include="..\common\conc\AtomicMem.hpp" />
+    <ClInclude Include="..\common\conc\AtomicPtr.h" />
+    <ClInclude Include="..\common\conc\AtomicPtr.hpp" />
+    <ClInclude Include="..\common\conc\AtomicPtrIntPair.h" />
+    <ClInclude Include="..\common\conc\AtomicPtrIntPair.hpp" />
+    <ClInclude Include="..\common\conc\CellPool.h" />
+    <ClInclude Include="..\common\conc\CellPool.hpp" />
+    <ClInclude Include="..\common\conc\def.h" />
+    <ClInclude Include="..\common\conc\fnc.h" />
+    <ClInclude Include="..\common\conc\fnc.hpp" />
+    <ClInclude Include="..\common\conc\Interlocked.h" />
+    <ClInclude Include="..\common\conc\Interlocked.hpp" />
+    <ClInclude Include="..\common\conc\LockFreeCell.h" />
+    <ClInclude Include="..\common\conc\LockFreeQueue.h" />
+    <ClInclude Include="..\common\conc\LockFreeQueue.hpp" />
+    <ClInclude Include="..\common\conc\LockFreeStack.h" />
+    <ClInclude Include="..\common\conc\LockFreeStack.hpp" />
+    <ClInclude Include="..\common\conc\ObjFactoryDef.h" />
+    <ClInclude Include="..\common\conc\ObjFactoryDef.hpp" />
+    <ClInclude Include="..\common\conc\ObjFactoryInterface.h" />
+    <ClInclude Include="..\common\conc\ObjFactoryInterface.hpp" />
+    <ClInclude Include="..\common\conc\ObjPool.h" />
+    <ClInclude Include="..\common\conc\ObjPool.hpp" />
+    <ClInclude Include="..\common\types.h" />
+    <ClInclude Include="avstp\SharedPtr.h" />
+    <ClInclude Include="avstp\SharedPtr.hpp" />
+    <ClInclude Include="avstp\TaskData.h" />
+    <ClInclude Include="avstp\TaskDispatcher.h" />
+    <ClInclude Include="avstp\TaskDispPool.h" />
+    <ClInclude Include="avstp\ThreadBase.h" />
+    <ClInclude Include="avstp\ThreadMgr.h" />
+    <ClInclude Include="avstp\ThreadPool.h" />
+    <ClInclude Include="avstp\ThreadSync.h" />
+    <ClInclude Include="avstp\ThreadWorker.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\AvstpFinder.cpp" />
+    <ClCompile Include="..\common\AvstpWrapper.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="avstp\TaskData.cpp" />
+    <ClCompile Include="avstp\TaskDispatcher.cpp" />
+    <ClCompile Include="avstp\TaskDispPool.cpp" />
+    <ClCompile Include="avstp\ThreadBase.cpp" />
+    <ClCompile Include="avstp\ThreadMgr.cpp" />
+    <ClCompile Include="avstp\ThreadPool.cpp" />
+    <ClCompile Include="avstp\ThreadSync.cpp" />
+    <ClCompile Include="avstp\ThreadWorker.cpp" />
+    <ClCompile Include="avs_filter_init.cpp" />
+    <ClCompile Include="avstp.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="avstp.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

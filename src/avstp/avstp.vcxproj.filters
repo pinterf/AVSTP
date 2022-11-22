@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{1df091eb-8306-47ab-a93a-bb9cfedd058c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\conc">
+      <UniqueIdentifier>{0336855b-e5f2-497c-ab23-09838c8bed38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="avstp">
+      <UniqueIdentifier>{49cc2d2f-024a-4963-b2e5-5b999b9a7d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fstb">
+      <UniqueIdentifier>{cdb3706b-7878-4c41-9caa-6b111d06c4de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\avisynth.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\avstp.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\AvstpFinder.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioAdd.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioAdd.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioMax.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioMax.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioSub.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AioSub.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\Array.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\Array.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicInt.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicInt.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicIntOp.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicIntOp.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicMem.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicMem.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicPtr.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicPtr.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicPtrIntPair.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\AtomicPtrIntPair.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\CellPool.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\CellPool.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\def.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\fnc.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\fnc.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\Interlocked.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\Interlocked.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\LockFreeCell.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\LockFreeQueue.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\LockFreeQueue.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\LockFreeStack.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\LockFreeStack.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjFactoryDef.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjFactoryDef.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjFactoryInterface.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjFactoryInterface.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjPool.h">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\conc\ObjPool.hpp">
+      <Filter>common\conc</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\SharedPtr.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\SharedPtr.hpp">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\TaskData.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\TaskDispatcher.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\TaskDispPool.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\ThreadBase.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\ThreadMgr.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\ThreadPool.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\ThreadSync.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="avstp\ThreadWorker.h">
+      <Filter>avstp</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\common\fstb\SingleObj.h">
+      <Filter>fstb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\fstb\SingleObj.hpp">
+      <Filter>fstb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\fstb\AllocAlign.h">
+      <Filter>fstb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\fstb\AllocAlign.hpp">
+      <Filter>fstb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\fstb\def.h">
+      <Filter>fstb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\types.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\AvstpFinder.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\TaskData.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\TaskDispatcher.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\TaskDispPool.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\ThreadBase.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\ThreadMgr.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\ThreadPool.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\ThreadSync.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avstp\ThreadWorker.cpp">
+      <Filter>avstp</Filter>
+    </ClCompile>
+    <ClCompile Include="avs_filter_init.cpp" />
+    <ClCompile Include="avstp.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\common\AvstpWrapper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="avstp.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\common\AvstpWrapper.h">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSched.h">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSched.hpp">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSimple.h">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTFlowGraphSimple.hpp">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTSlicer.h">
+      <Filter>common</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\common\MTSlicer.hpp">
+      <Filter>common</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
