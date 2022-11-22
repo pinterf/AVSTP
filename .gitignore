@@ -17,6 +17,10 @@
 mono_crash.*
 
 # Build results
+DebugWin32/
+Debugx64/
+ReleaseWin32/
+Releasex64/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
