@@ -30,6 +30,8 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
  #define WIN32_LEAN_AND_MEAN
 #endif
 
+#include "fstb/def.h"
+
 #if defined (_MSC_VER)
  #include "AvstpFinder.h"
 #endif
@@ -187,7 +189,6 @@ AvstpWrapper::AvstpWrapper ()
 template <class T>
 void	AvstpWrapper::resolve_name (T &fnc_ptr, const char *name_0)
 {
-	assert (&fnc_ptr != 0);
 	assert (name_0 != 0);
 	assert (_dll_hnd != 0);
 
@@ -246,6 +247,8 @@ avstp_TaskDispatcher *	AvstpWrapper::fallback_create_dispatcher_ptr ()
 
 void	AvstpWrapper::fallback_destroy_dispatcher_ptr (avstp_TaskDispatcher *td_ptr)
 {
+	fstb::unused (td_ptr);
+
 	assert (td_ptr == (avstp_TaskDispatcher *) (&_dummy_dispatcher));
 }
 

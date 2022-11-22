@@ -45,11 +45,7 @@ class TaskData
 
 public:
 
-						TaskData ();
-						TaskData (const TaskData &other);
-	virtual			~TaskData () {}
-
-	TaskData &		operator = (const TaskData &other);
+	virtual			~TaskData () = default;
 
 	void				init (avstp_TaskPtr task_ptr, void *user_data_ptr, TaskDispatcher &dispatcher);
 	TaskDispatcher &
@@ -68,10 +64,10 @@ protected:
 
 private:
 
-	avstp_TaskPtr	_task_ptr;
-	void *			_user_data_ptr;
+	avstp_TaskPtr	_task_ptr       = nullptr;
+	void *			_user_data_ptr  = nullptr;
 	TaskDispatcher *
-						_dispatcher_ptr;
+						_dispatcher_ptr = nullptr;
 
 
 
@@ -79,8 +75,8 @@ private:
 
 private:
 
-	bool				operator == (const TaskData &other) const;
-	bool				operator != (const TaskData &other) const;
+	bool				operator == (const TaskData &other) const = delete;
+	bool				operator != (const TaskData &other) const = delete;
 
 };	// class TaskData
 

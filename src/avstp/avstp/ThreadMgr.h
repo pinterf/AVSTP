@@ -41,7 +41,7 @@ class ThreadMgr
 
 public:
 
-	virtual			~ThreadMgr () {}
+	virtual			~ThreadMgr () = default;
 
 	static int		count_nbr_logical_proc ();
 	static void		set_thread_name (const char *name_0);
@@ -64,11 +64,13 @@ private:
 
 private:
 
-						ThreadMgr ();
-						ThreadMgr (const ThreadMgr &other);
-	ThreadMgr &		operator = (const ThreadMgr &other);
-	bool				operator == (const ThreadMgr &other) const;
-	bool				operator != (const ThreadMgr &other) const;
+						ThreadMgr ()                               = delete;
+						ThreadMgr (const ThreadMgr &other)         = delete;
+						ThreadMgr (ThreadMgr &&other)              = delete;
+	ThreadMgr &		operator = (const ThreadMgr &other)        = delete;
+	ThreadMgr &		operator = (ThreadMgr &&other)             = delete;
+	bool				operator == (const ThreadMgr &other) const = delete;
+	bool				operator != (const ThreadMgr &other) const = delete;
 
 };	// class ThreadMgr
 

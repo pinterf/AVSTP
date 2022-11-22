@@ -84,10 +84,12 @@ private:
 
 private:
 
-						ThreadBase (const ThreadBase &other);
-	ThreadBase &	operator = (const ThreadBase &other);
-	bool				operator == (const ThreadBase &other) const;
-	bool				operator != (const ThreadBase &other) const;
+						ThreadBase (const ThreadBase &other)        = delete;
+						ThreadBase (ThreadBase &&other)             = delete;
+	ThreadBase &	operator = (const ThreadBase &other)        = delete;
+	ThreadBase &	operator = (ThreadBase &&other)             = delete;
+	bool				operator == (const ThreadBase &other) const = delete;
+	bool				operator != (const ThreadBase &other) const = delete;
 
 };	// class ThreadBase
 

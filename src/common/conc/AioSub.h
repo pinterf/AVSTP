@@ -46,10 +46,9 @@ class AioSub
 public:
 
 	explicit inline
-						AioSub (T operand);
-	virtual			~AioSub () = default;
+	               AioSub (T operand);
 
-	inline T			operator () (T old_val) const;
+	inline T       operator () (T old_val) const;
 
 
 
@@ -63,7 +62,7 @@ protected:
 
 private:
 
-	T					_operand;
+	T              _operand;
 
 
 
@@ -71,11 +70,13 @@ private:
 
 private:
 
-						AioSub ()                                   = delete;
-						AioSub (const AioSub <T> &other)            = delete;
-	AioSub <T> &	operator = (const AioSub <T> &other)        = delete;
-	bool				operator == (const AioSub <T> &other) const = delete;
-	bool				operator != (const AioSub <T> &other) const = delete;
+	               AioSub ()                                   = delete;
+	               AioSub (const AioSub <T> &other)            = delete;
+	               AioSub (const AioSub <T> &&other)           = delete;
+	AioSub <T> &   operator = (const AioSub <T> &other)        = delete;
+	AioSub <T> &   operator = (const AioSub <T> &&other)       = delete;
+	bool           operator == (const AioSub <T> &other) const = delete;
+	bool           operator != (const AioSub <T> &other) const = delete;
 
 };	// class AioSub
 

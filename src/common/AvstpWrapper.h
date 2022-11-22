@@ -109,10 +109,12 @@ private:
 
 private:
 
-	               AvstpWrapper (const AvstpWrapper &other);
-	AvstpWrapper & operator = (const AvstpWrapper &other);
-	bool           operator == (const AvstpWrapper &other) const;
-	bool           operator != (const AvstpWrapper &other) const;
+	               AvstpWrapper (const AvstpWrapper &other)      = delete;
+	               AvstpWrapper (AvstpWrapper &&other)           = delete;
+	AvstpWrapper & operator = (const AvstpWrapper &other)        = delete;
+	AvstpWrapper & operator = (AvstpWrapper &&other)             = delete;
+	bool           operator == (const AvstpWrapper &other) const = delete;
+	bool           operator != (const AvstpWrapper &other) const = delete;
 
 };	// class AvstpWrapper
 

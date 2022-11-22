@@ -86,10 +86,12 @@ private:
 
 private:
 
-						TaskDispPool (const TaskDispPool &other);
-	TaskDispPool &	operator = (const TaskDispPool &other);
-	bool				operator == (const TaskDispPool &other) const;
-	bool				operator != (const TaskDispPool &other) const;
+						TaskDispPool (const TaskDispPool &other)      = delete;
+						TaskDispPool (TaskDispPool &&other)           = delete;
+	TaskDispPool &	operator = (const TaskDispPool &other)        = delete;
+	TaskDispPool &	operator = (TaskDispPool &&other)             = delete;
+	bool				operator == (const TaskDispPool &other) const = delete;
+	bool				operator != (const TaskDispPool &other) const = delete;
 
 };	// class TaskDispPool
 

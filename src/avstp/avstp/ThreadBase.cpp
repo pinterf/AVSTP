@@ -140,7 +140,7 @@ bool	ThreadBase::wait_for_death (long timeout)
 
 void	ThreadBase::kill ()
 {
-	const ::BOOL		kill_res = ::TerminateThread (_handle, -1);
+	const ::BOOL		kill_res = ::TerminateThread (_handle, ::DWORD (-1));
 	const ::DWORD		cur_thread_id = ::GetCurrentThreadId ();
 	if (kill_res == 0)
 	{

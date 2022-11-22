@@ -57,23 +57,27 @@ public:
 
 #if defined (conc_HAS_CAS_128)
 
- #if defined (_MSC_VER)
+ #if defined (__GNUC__)
+
+	typedef unsigned __int128 Data128;
+
+ #elif defined (_MSC_VER)
 
 	class Data128
 	{
 	public:
 		conc_FORCEINLINE bool
-							operator == (const Data128 & other) const;
+		               operator == (const Data128 & other) const;
 		conc_FORCEINLINE bool
-							operator != (const Data128 & other) const;
-							
-		uint64_t       _data [2];
+		               operator != (const Data128 & other) const;
+
+		int64_t        _data [2];
 	};
 	static_assert ((sizeof (Data128) == 16), "");
 
  #else
 
-	typedef	__uint128_t	Data128;
+	typedef __uint128_t Data128;
 
  #endif
 
@@ -101,12 +105,8 @@ protected:
 
 private:
 
-#if (conc_WORD_SIZE == 64)
-	typedef	int64_t	IntPtr;
-#else
-	typedef	int32_t	IntPtr;
-#endif
-	static_assert ((sizeof (IntPtr) == sizeof (void *)), "");
+	typedef intptr_t IntPtr;
+	static_assert ((sizeof (IntPtr) >= sizeof (void *)), "");
 
 
 
@@ -114,12 +114,12 @@ private:
 
 private:
 
-						Interlocked ()                               = delete;
-						Interlocked (const Interlocked &other)       = delete;
-	virtual			~Interlocked ()                              = delete;
-	Interlocked &	operator = (const Interlocked &other)        = delete;
-	bool				operator == (const Interlocked &other) const = delete;
-	bool				operator != (const Interlocked &other) const = delete;
+	               Interlocked ()                               = delete;
+	               Interlocked (const Interlocked &other)       = delete;
+	virtual        ~Interlocked ()                              = delete;
+	Interlocked &  operator = (const Interlocked &other)        = delete;
+	bool           operator == (const Interlocked &other) const = delete;
+	bool           operator != (const Interlocked &other) const = delete;
 
 };	// class Interlocked
 

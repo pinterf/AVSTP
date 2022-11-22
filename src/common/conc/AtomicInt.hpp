@@ -80,7 +80,6 @@ AtomicInt <T>::AtomicInt (const AtomicInt <T> &other)
 #if (conc_ARCHI == conc_ARCHI_X86)
 	assert (is_ptr_aligned_nz ((const void *) (&_val), sizeof (_val)));
 #endif // conc_ARCHI
-	assert (&other != 0);
 }
 
 
@@ -129,7 +128,9 @@ T	AtomicInt <T>::cas (T other, T comp)
 #if (conc_ARCHI == conc_ARCHI_X86)
 	return (T (StoredTypeWrapper::cas (_val, other, comp)));
 #else  // conc_ARCHI
-	_val.compare_exchange_weak (comp, other);
+	// Some algorithms do something specific upon failure, so we need to
+	// use the strong version.
+	_val.compare_exchange_strong (comp, other);
 	return (comp);
 #endif // conc_ARCHI
 }
@@ -139,8 +140,6 @@ T	AtomicInt <T>::cas (T other, T comp)
 template <class T>
 AtomicInt <T> &	AtomicInt <T>::operator += (const T &other)
 {
-	assert (&other != 0);
-
 #if (conc_ARCHI == conc_ARCHI_X86)
 	AioAdd <T>	ftor (other);
 	AtomicIntOp::exec (*this, ftor);
@@ -156,8 +155,6 @@ AtomicInt <T> &	AtomicInt <T>::operator += (const T &other)
 template <class T>
 AtomicInt <T> &	AtomicInt <T>::operator -= (const T &other)
 {
-	assert (&other != 0);
-
 #if (conc_ARCHI == conc_ARCHI_X86)
 	AioSub <T>	ftor (other);
 	AtomicIntOp::exec (*this, ftor);

@@ -45,13 +45,6 @@ ThreadWorker::ThreadWorker (ThreadPool &pool)
 :	_pool (pool)
 ,	_exit_flag (false)
 {
-	assert (&pool != 0);
-}
-
-
-
-ThreadWorker::~ThreadWorker ()
-{
 	// Nothing
 }
 

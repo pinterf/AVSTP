@@ -42,12 +42,6 @@
     <ClInclude Include="..\common\conc\AioSub.hpp">
       <Filter>common\conc</Filter>
     </ClInclude>
-    <ClInclude Include="..\common\conc\Array.h">
-      <Filter>common\conc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\conc\Array.hpp">
-      <Filter>common\conc</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\conc\AtomicInt.h">
       <Filter>common\conc</Filter>
     </ClInclude>
@@ -132,12 +126,6 @@
     <ClInclude Include="..\common\conc\ObjPool.hpp">
       <Filter>common\conc</Filter>
     </ClInclude>
-    <ClInclude Include="avstp\SharedPtr.h">
-      <Filter>avstp</Filter>
-    </ClInclude>
-    <ClInclude Include="avstp\SharedPtr.hpp">
-      <Filter>avstp</Filter>
-    </ClInclude>
     <ClInclude Include="avstp\TaskData.h">
       <Filter>avstp</Filter>
     </ClInclude>
@@ -177,9 +165,6 @@
     </ClInclude>
     <ClInclude Include="..\common\fstb\def.h">
       <Filter>fstb</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\types.h">
-      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

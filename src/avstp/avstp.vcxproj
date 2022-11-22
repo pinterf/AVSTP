@@ -25,10 +25,10 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Platform)'=='Win32'" Label="Configuration">
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'" Label="Configuration">
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -45,22 +45,16 @@
   <PropertyGroup>
     <_ProjectFileVersion>11.0.60610.1</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(SolutionDir)$(Configuration)$(Platform)\</OutDir>
     <IntDir>$(Configuration)$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -70,6 +64,8 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -95,8 +91,13 @@
       <AdditionalIncludeDirectories>.\;..\common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;AVSTP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4127;4505</DisableSpecificWarnings>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -139,8 +140,6 @@
     <ClInclude Include="..\common\conc\AioMax.hpp" />
     <ClInclude Include="..\common\conc\AioSub.h" />
     <ClInclude Include="..\common\conc\AioSub.hpp" />
-    <ClInclude Include="..\common\conc\Array.h" />
-    <ClInclude Include="..\common\conc\Array.hpp" />
     <ClInclude Include="..\common\conc\AtomicInt.h" />
     <ClInclude Include="..\common\conc\AtomicInt.hpp" />
     <ClInclude Include="..\common\conc\AtomicIntOp.h" />
@@ -169,9 +168,6 @@
     <ClInclude Include="..\common\conc\ObjFactoryInterface.hpp" />
     <ClInclude Include="..\common\conc\ObjPool.h" />
     <ClInclude Include="..\common\conc\ObjPool.hpp" />
-    <ClInclude Include="..\common\types.h" />
-    <ClInclude Include="avstp\SharedPtr.h" />
-    <ClInclude Include="avstp\SharedPtr.hpp" />
     <ClInclude Include="avstp\TaskData.h" />
     <ClInclude Include="avstp\TaskDispatcher.h" />
     <ClInclude Include="avstp\TaskDispPool.h" />

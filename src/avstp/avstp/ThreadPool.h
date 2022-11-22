@@ -27,7 +27,6 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 /*\\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-#include	"avstp/SharedPtr.h"
 #include	"avstp/TaskData.h"
 #include	"avstp/ThreadSync.h"
 #include	"avstp/ThreadWorker.h"
@@ -87,7 +86,7 @@ private:
 	typedef	conc::CellPool <TaskData>	TaskPool;
 	typedef	conc::LockFreeQueue <TaskData>	TaskQueue;
 
-	typedef	SharedPtr <ThreadWorker>	WorkerSPtr;
+	typedef	std::shared_ptr <ThreadWorker>	WorkerSPtr;
 	typedef	std::vector <WorkerSPtr>	WorkerArray;
 
 	bool				is_mt () const;
@@ -123,11 +122,13 @@ private:
 
 private:
 
-						ThreadPool ();
-						ThreadPool (const ThreadPool &other);
-	ThreadPool &	operator = (const ThreadPool &other);
-	bool				operator == (const ThreadPool &other) const;
-	bool				operator != (const ThreadPool &other) const;
+						ThreadPool ()                               = delete;
+						ThreadPool (const ThreadPool &other)        = delete;
+						ThreadPool (ThreadPool &&other)             = delete;
+	ThreadPool &	operator = (const ThreadPool &other)        = delete;
+	ThreadPool &	operator = (ThreadPool &&other)             = delete;
+	bool				operator == (const ThreadPool &other) const = delete;
+	bool				operator != (const ThreadPool &other) const = delete;
 
 };	// class ThreadPool
 

@@ -78,12 +78,15 @@ private:
 
 private:
 
-						TaskDispatcher ();
-						TaskDispatcher (const TaskDispatcher &other);
+						TaskDispatcher ()                               = delete;
+						TaskDispatcher (const TaskDispatcher &other)    = delete;
+						TaskDispatcher (TaskDispatcher &&other)         = delete;
 	TaskDispatcher &
-						operator = (const TaskDispatcher &other);
-	bool				operator == (const TaskDispatcher &other) const;
-	bool				operator != (const TaskDispatcher &other) const;
+						operator = (const TaskDispatcher &other)        = delete;
+	TaskDispatcher &
+						operator = (TaskDispatcher &&other)             = delete;
+	bool				operator == (const TaskDispatcher &other) const = delete;
+	bool				operator != (const TaskDispatcher &other) const = delete;
 
 };	// class TaskDispatcher
 

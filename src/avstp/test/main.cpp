@@ -91,7 +91,7 @@ static void		proc_fnc (avstp_TaskDispatcher *td_ptr, void *user_data_ptr)
 
 
 
-int	main (int argc, char *argv [])
+int	main (int /*argc*/, char * /*argv*/ [])
 {
 	::avstp_TaskDispatcher *	td_ptr = ::avstp_create_dispatcher ();
 

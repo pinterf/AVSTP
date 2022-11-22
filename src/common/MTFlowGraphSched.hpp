@@ -146,8 +146,6 @@ Throws: Depends on dispatcher creation failures.
 template <class T, class GR, class GD, int MAXT>
 void	MTFlowGraphSched <T, GR, GD, MAXT>::start (const GR &dep_graph, GD &glob_data, ProcPtr proc_ptr)
 {
-	assert (&dep_graph != 0);
-	assert (&glob_data != 0);
 	assert (proc_ptr != 0);
 
 	_proc_ptr      = proc_ptr;
@@ -254,8 +252,6 @@ avstp_TaskDispatcher *	MTFlowGraphSched <T, GR, GD, MAXT>::use_dispatcher () con
 template <class T, class GR, class GD, int MAXT>
 void	MTFlowGraphSched <T, GR, GD, MAXT>::complete_task (TaskData &td)
 {
-	assert (&td != 0);
-
 	for (GR::Iterator it = _dep_graph_ptr->get_out_node_it (td._task_index)
 	;	it.cont ()
 	;	it.next ())

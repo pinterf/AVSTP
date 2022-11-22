@@ -72,10 +72,12 @@ private:
 
 private:
 
-						ThreadSync (const ThreadSync &other);
-	ThreadSync &	operator = (const ThreadSync &other);
-	bool				operator == (const ThreadSync &other) const;
-	bool				operator != (const ThreadSync &other) const;
+						ThreadSync (const ThreadSync &other)        = delete;
+						ThreadSync (ThreadSync &&other)             = delete;
+	ThreadSync &	operator = (const ThreadSync &other)        = delete;
+	ThreadSync &	operator = (ThreadSync &&other)             = delete;
+	bool				operator == (const ThreadSync &other) const = delete;
+	bool				operator != (const ThreadSync &other) const = delete;
 
 };	// class ThreadSync
 

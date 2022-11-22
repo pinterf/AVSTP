@@ -47,7 +47,7 @@ class ThreadWorker
 public:
 
 						ThreadWorker (ThreadPool &pool);
-	virtual			~ThreadWorker ();
+	virtual			~ThreadWorker () = default;
 
 	void				request_exit ();
 
@@ -75,11 +75,13 @@ private:
 
 private:
 
-						ThreadWorker ();
-						ThreadWorker (const ThreadWorker &other);
-	ThreadWorker &	operator = (const ThreadWorker &other);
-	bool				operator == (const ThreadWorker &other) const;
-	bool				operator != (const ThreadWorker &other) const;
+						ThreadWorker ()                               = delete;
+						ThreadWorker (const ThreadWorker &other)      = delete;
+						ThreadWorker (ThreadWorker &&other)           = delete;
+	ThreadWorker &	operator = (const ThreadWorker &other)        = delete;
+	ThreadWorker &	operator = (ThreadWorker &&other)             = delete;
+	bool				operator == (const ThreadWorker &other) const = delete;
+	bool				operator != (const ThreadWorker &other) const = delete;
 
 };	// class ThreadWorker
 

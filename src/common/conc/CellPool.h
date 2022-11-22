@@ -27,13 +27,13 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 /*\\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-#include "conc/Array.h"
 #include "conc/AtomicPtr.h"
 #include "conc/AtomicInt.h"
 #include "conc/LockFreeCell.h"
 #include "conc/LockFreeStack.h"
 #include "fstb/SingleObj.h"
 
+#include <array>
 #include <mutex>
 
 #include <cstddef>
@@ -87,7 +87,7 @@ private:
 	typedef  LockFreeStack <T>    CellStack;
 	typedef  AtomicInt <size_t>   CountCells;
 	typedef  AtomicInt <int>      CountZones;
-	typedef  Array <AtomicPtr <CellType>, MAX_NBR_ZONES>  ZoneList;
+	typedef  std::array <AtomicPtr <CellType>, MAX_NBR_ZONES>  ZoneList;
 
 	class Members	// These ones must be aligned
 	{
@@ -104,7 +104,7 @@ private:
 		size_t         _nbr_elt;
 	};
 
-	void           allocate_zone (int zone_index, size_t cur_size, AtomicPtr <CellType> & zone_ptr_ref);
+	void           allocate_zone (size_t cur_size, AtomicPtr <CellType> & zone_ptr_ref);
 
 	static inline size_t
 	               compute_grown_size (size_t prev_size);
@@ -126,7 +126,9 @@ private:
 private:
 
 	               CellPool (const CellPool <T> &other)          = delete;
+	               CellPool (CellPool <T> &&other)               = delete;
 	CellPool <T> & operator = (const CellPool <T> &other)        = delete;
+	CellPool <T> & operator = (CellPool <T> &&other)             = delete;
 	bool           operator == (const CellPool <T> &other) const = delete;
 	bool           operator != (const CellPool <T> &other) const = delete;
 

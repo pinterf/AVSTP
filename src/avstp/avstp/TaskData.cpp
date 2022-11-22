@@ -40,42 +40,6 @@ namespace avstp
 
 
 
-TaskData::TaskData ()
-:	_task_ptr (0)
-,	_user_data_ptr (0)
-,	_dispatcher_ptr (0)
-{
-	// Nothing
-}
-
-
-
-TaskData::TaskData (const TaskData &other)
-:	_task_ptr (other._task_ptr)
-,	_user_data_ptr (other._user_data_ptr)
-,	_dispatcher_ptr (other._dispatcher_ptr)
-{
-	assert (&other != 0);
-}
-
-
-
-TaskData &	TaskData::operator = (const TaskData &other)
-{
-	assert (&other != 0);
-
-	if (this != &other)
-	{
-		_task_ptr       = other._task_ptr;
-		_user_data_ptr  = other._user_data_ptr;
-		_dispatcher_ptr = other._dispatcher_ptr;
-	}
-
-	return (*this);
-}
-
-
-
 void	TaskData::init (avstp_TaskPtr task_ptr, void *user_data_ptr, TaskDispatcher &dispatcher)
 {
 	assert (_task_ptr == 0);

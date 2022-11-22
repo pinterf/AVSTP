@@ -53,7 +53,7 @@ CellPool <T>::CellPool ()
 
 	for (int zone_index = 0; zone_index < MAX_NBR_ZONES; ++zone_index)
 	{
-		_m_ptr->_zone_list [zone_index] = 0;
+		_m_ptr->_zone_list [zone_index] = nullptr;
 	}
 }
 
@@ -73,13 +73,13 @@ template <class T>
 void	CellPool <T>::clear_all ()
 {
 #if !defined (NDEBUG)
-	size_t         nbr_total_cells =
+	const size_t   nbr_total_cells =
 		compute_total_size_for_zones (_m_ptr->_nbr_zones);
 	
 	assert (_m_ptr->_nbr_avail_cells == nbr_total_cells);
 #endif
 	
-	while (_cell_stack.pop () != 0)
+	while (_cell_stack.pop () != nullptr)
 	{
 		continue;
 	}
@@ -89,10 +89,10 @@ void	CellPool <T>::clear_all ()
 	{
 		AtomicPtr <CellType> &  zone_ptr_ref = _m_ptr->_zone_list [zone_index];
 		CellType *     zone_ptr = zone_ptr_ref;
-		if (zone_ptr != 0)
+		if (zone_ptr != nullptr)
 		{
 			dealloc_cells (zone_ptr);
-			zone_ptr_ref = 0;
+			zone_ptr_ref = nullptr;
 		}
 	}
 	_m_ptr->_nbr_zones       = 0;
@@ -113,10 +113,10 @@ void	CellPool <T>::expand_to (size_t nbr_cells)
 	while (total_size < nbr_cells && zone_index < MAX_NBR_ZONES)
 	{
 		AtomicPtr <CellType> &  zone_ptr_ref = _m_ptr->_zone_list [zone_index];
-		CellType *     zone_ptr = zone_ptr_ref;
-		if (zone_ptr == 0)
+		const CellType *  zone_ptr = zone_ptr_ref;
+		if (zone_ptr == nullptr)
 		{
-			allocate_zone (zone_index, cur_size, zone_ptr_ref);
+			allocate_zone (cur_size, zone_ptr_ref);
 		}
 
 		total_size += cur_size;
@@ -134,7 +134,7 @@ void	CellPool <T>::expand_to (size_t nbr_cells)
 template <class T>
 typename CellPool <T>::CellType *	CellPool <T>::take_cell (bool autogrow_flag)
 {
-	CellType *     cell_ptr = 0;
+	CellType *     cell_ptr = nullptr;
 	
 	const int      nbr_zones = _m_ptr->_nbr_zones;
 
@@ -142,20 +142,25 @@ typename CellPool <T>::CellType *	CellPool <T>::take_cell (bool autogrow_flag)
 	{
 		cell_ptr = _cell_stack.pop ();
 
-		if ((cell_ptr == 0) && autogrow_flag && (nbr_zones < MAX_NBR_ZONES))
+		if (   cell_ptr == nullptr
+		    && autogrow_flag
+		    && nbr_zones < MAX_NBR_ZONES)
 		{
-			const size_t	new_size = compute_total_size_for_zones (nbr_zones + 1);
+			const size_t	new_size =
+				compute_total_size_for_zones (nbr_zones + 1);
 			expand_to (new_size);
 		}
 	}
-	while ((cell_ptr == 0) && autogrow_flag && (nbr_zones < MAX_NBR_ZONES));
+	while (   cell_ptr == nullptr
+	       && autogrow_flag
+	       && nbr_zones < MAX_NBR_ZONES);
 
-	if (cell_ptr != 0)
+	if (cell_ptr != nullptr)
 	{
 		-- _m_ptr->_nbr_avail_cells;
 	}
 
-	return (cell_ptr);
+	return cell_ptr;
 }
 
 
@@ -164,8 +169,6 @@ typename CellPool <T>::CellType *	CellPool <T>::take_cell (bool autogrow_flag)
 template <class T>
 void	CellPool <T>::return_cell (CellType &cell)
 {
-	assert (&cell != 0);
-
 	_cell_stack.push (cell);
 
 	++ _m_ptr->_nbr_avail_cells;
@@ -182,16 +185,13 @@ void	CellPool <T>::return_cell (CellType &cell)
 
 
 template <class T>
-void	CellPool <T>::allocate_zone (int zone_index, size_t cur_size, AtomicPtr <CellType> & zone_ptr_ref)
+void	CellPool <T>::allocate_zone (size_t cur_size, AtomicPtr <CellType> & zone_ptr_ref)
 {
-	assert (zone_index >= 0);
-	assert (zone_index < MAX_NBR_ZONES);
-
 	std::lock_guard <std::mutex>  lock (_alloc_mutex);
 
 	CellType *     zone_ptr = alloc_cells (cur_size);
 
-	if (zone_ptr_ref.cas (zone_ptr, 0) != (CellType *)0)
+	if (zone_ptr_ref.cas (zone_ptr, nullptr) != static_cast <CellType *> (nullptr))
 	{
 		// CAS has failed, meaning that another thread is allocating this zone.
 		dealloc_cells (zone_ptr);
@@ -240,7 +240,7 @@ size_t	CellPool <T>::compute_total_size_for_zones (int nbr_zones)
 		++ zone_index;
 	}
 
-	return (total_size);
+	return total_size;
 }
 
 
@@ -272,7 +272,7 @@ typename CellPool <T>::CellType *	CellPool <T>::alloc_cells (size_t n)
 	}
 	catch (...)
 	{
-		for (size_t i = count; i > 0; --count)
+		for (size_t i = count; i > 0; --i)
 		{
 			(cell_ptr + i - 1)->~CellType ();
 		}
@@ -280,7 +280,7 @@ typename CellPool <T>::CellType *	CellPool <T>::alloc_cells (size_t n)
 		throw;
 	}
 
-	return (cell_ptr);
+	return cell_ptr;
 }
 
 

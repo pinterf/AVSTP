@@ -24,14 +24,14 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 /*\\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-#define	NOGDI
-#define	NOMINMAX
-#define	WIN32_LEAN_AND_MEAN
+#define NOGDI
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
 
-#include	"avstp/ThreadPool.h"
-#include	"avisynth.h"
+#include "avstp/ThreadPool.h"
+#include "avisynth.h"
 
-#include	<cassert>
+#include <cassert>
 
 
 
@@ -39,7 +39,7 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 
 
-::AVSValue __cdecl	avstp_set_threads (::AVSValue args, void *user_data_ptr, ::IScriptEnvironment *env_ptr)
+::AVSValue __cdecl	avstp_set_threads (::AVSValue args, void * /*user_data_ptr*/, ::IScriptEnvironment *env_ptr)
 {
 	int				actual_nbr_threads = 0;
 

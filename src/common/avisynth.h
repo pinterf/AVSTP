@@ -674,7 +674,7 @@ public:
   AVSValue(float f) { type = 'f'; floating_pt = f; }
   AVSValue(double f) { type = 'f'; floating_pt = float(f); }
   AVSValue(const char* s) { type = 's'; string = s; }
-  AVSValue(const AVSValue* a, int size) { type = 'a'; array = a; array_size = size; }
+  AVSValue(const AVSValue* a, int size) { type = 'a'; array = a; array_size = short (size); }
   AVSValue(const AVSValue& v) { Assign(&v, true); }
 
   ~AVSValue() { if (IsClip() && clip) clip->Release(); }
@@ -755,7 +755,7 @@ public:
   void __stdcall GetAudio(void* buf, __int64 start, __int64 count, IScriptEnvironment* env) { child->GetAudio(buf, start, count, env); }
   const VideoInfo& __stdcall GetVideoInfo() { return vi; }
   bool __stdcall GetParity(int n) { return child->GetParity(n); }
-  void __stdcall SetCacheHints(int cachehints,int frame_range) { } ;  // We do not pass cache requests upwards, only to the next filter.
+  void __stdcall SetCacheHints(int /*cachehints*/,int /*frame_range*/) { } ;  // We do not pass cache requests upwards, only to the next filter.
 };
 
 

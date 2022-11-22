@@ -74,12 +74,14 @@ private:
 
 private:
 
-	               AvstpFinder ();
-	               AvstpFinder (const AvstpFinder &other);
-	virtual        ~AvstpFinder () {}
-	AvstpFinder &  operator = (const AvstpFinder &other);
-	bool           operator == (const AvstpFinder &other) const;
-	bool           operator != (const AvstpFinder &other) const;
+	               AvstpFinder ()                               = delete;
+	               AvstpFinder (const AvstpFinder &other)       = delete;
+	               AvstpFinder (AvstpFinder &&other)            = delete;
+	               ~AvstpFinder ()                              = delete;
+	AvstpFinder &  operator = (const AvstpFinder &other)        = delete;
+	AvstpFinder &  operator = (AvstpFinder &&other)             = delete;
+	bool           operator == (const AvstpFinder &other) const = delete;
+	bool           operator != (const AvstpFinder &other) const = delete;
 
 };	// class AvstpFinder
 

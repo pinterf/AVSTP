@@ -110,7 +110,7 @@ void	ThreadMgr::set_thread_name (const char *name_0)
 	{
 		0x1000,
 		name_0,
-		-1,
+		::DWORD (-1),
 		0
 	};
 

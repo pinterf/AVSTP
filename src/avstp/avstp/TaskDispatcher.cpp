@@ -44,7 +44,7 @@ TaskDispatcher::TaskDispatcher (ThreadPool &pool)
 :	_pool (pool)
 ,	_task_cnt (0)
 {
-	assert (&pool != 0);
+	// Nothing
 }
 
 

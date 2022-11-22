@@ -47,10 +47,10 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 
 #if defined (_MSC_VER)
-static int __cdecl	avstp_new_handler_cb (size_t dummy)
+static int __cdecl	avstp_new_handler_cb (size_t /*dummy*/)
 {
 	throw std::bad_alloc ();
-	return (0);
+//	return 0;
 }
 #endif	// _MSC_VER
 
@@ -102,7 +102,7 @@ static void	avstp_dll_unload (::HINSTANCE /*hinst*/)
 
 
 
-::BOOL WINAPI DllMain (::HINSTANCE hinst, ::DWORD reason, ::LPVOID reserved_ptr)
+::BOOL WINAPI DllMain (::HINSTANCE hinst, ::DWORD reason, ::LPVOID /*reserved_ptr*/)
 {
 	switch (reason)
 	{

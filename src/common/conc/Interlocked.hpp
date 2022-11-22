@@ -100,10 +100,6 @@ int32_t	Interlocked::cas (int32_t volatile &dest, int32_t excg, int32_t comp)
 		::LONG (comp)
 	));
 
-#elif defined (__linux__)
-
-	return (__sync_val_compare_and_swap (&dest, comp, excg));
-
 #elif defined (__APPLE__)
 
 	return (::OSAtomicCompareAndSwap32Barrier (
@@ -111,6 +107,10 @@ int32_t	Interlocked::cas (int32_t volatile &dest, int32_t excg, int32_t comp)
 		excg,
 		const_cast <int32_t *> (reinterpret_cast <int32_t volatile *> (&dest))
 	) ? comp : excg);
+
+#elif defined (__GNUC__)
+
+	return (__sync_val_compare_and_swap (&dest, comp, excg));
 
 #else
 
@@ -205,18 +205,14 @@ int64_t	Interlocked::cas (int64_t volatile &dest, int64_t excg, int64_t comp)
 	"	mov				%%eax, (%%esi)			\n"
 	"	mov				%%edx, 4(%%esi)		\n"
 	:
-	: [old]  "X" (old)
-	, [dest] "X" (dest)
-	, [excg] "X" (excg)
-	, [comp] "X" (comp)
-	: "eax", "ebx", "ecx", "edx", "esi"
+	: [old]  "m" (old)
+	, [dest] "m" (dest)
+	, [excg] "m" (excg)
+	, [comp] "m" (comp)
+	: "eax", "ebx", "ecx", "edx", "esi", "memory"
 	);
 
 	return (old);
-
-#elif defined (__linux__)
-
-	return (__sync_val_compare_and_swap (&dest, comp, excg));
 
 #elif defined (__APPLE__)
 
@@ -225,6 +221,10 @@ int64_t	Interlocked::cas (int64_t volatile &dest, int64_t excg, int64_t comp)
 		excg, 
 		const_cast <int64_t *> (reinterpret_cast <int64_t volatile *> (&dest))
 	) ? comp : excg);
+
+#elif defined (__GNUC__)
+
+	return (__sync_val_compare_and_swap (&dest, comp, excg));
 
 #else
 
@@ -241,37 +241,7 @@ int64_t	Interlocked::cas (int64_t volatile &dest, int64_t excg, int64_t comp)
 
 void	Interlocked::swap (Data128 &old, volatile Data128 &dest, const Data128 &excg)
 {
-	assert (&old != 0);
 	assert (is_ptr_aligned_nz (&dest));
-
-#if defined (__APPLE__)
-
-	asm volatile ( 
-	"	mov				 %[excg], %%r9			\n"
-
-	"	push				%%rbx						\n"
-	"	mov				%[dest], %%rsi			\n"
-	"	movq				(%%r9), %%rbx			\n"
-	"	mov				8(%%r9), %%rcx			\n"
-
-	"cas_loop%=:	\n"
-	"	mov				(%%rsi), %%rax			\n"
-	"	mov				8(%%rsi), %%rdx		\n"
-	"	lock cmpxchg16b	(%%rsi)				\n"
-	"	jnz				cas_loop%=				\n"
-
-	"	mov				 %[old], %%r10			\n"
-	"	movq				%%rax, (%%r10)			\n"
-	"	movq				%%rdx, 8(%%r10)		\n"
-	"	pop				%%rbx						\n"
-	: 
-	: [excg] "X" (&excg)
-	, [old]  "X" (&old)
-	, [dest] "X" (&dest)
-	: "rsi", "rax", "rcx", "rdx", "r9", "r10"
-	);
-
-#else
 
 	Data128        tmp;
 	do
@@ -280,40 +250,25 @@ void	Interlocked::swap (Data128 &old, volatile Data128 &dest, const Data128 &exc
 		cas (tmp, dest, excg, old);
 	}
 	while (tmp != old);
-
-#endif
 }
 
 
 
 void	Interlocked::cas (Data128 &old, volatile Data128 &dest, const Data128 &excg, const Data128 &comp)
 {
-	assert (&old != 0);
 	assert (is_ptr_aligned_nz (&dest));
 
 #if defined (__APPLE__) || (defined (__CYGWIN__) && conc_WORD_SIZE == 64)
 
-	asm volatile (
-	"	mov              %[comp], %%r8   \n"
-	"	mov              %[excg], %%r9   \n"
-	"	mov              %[old],  %%r10  \n"
-	"	mov              %[dest], %%rsi  \n"
-	
-	"	push             %%rbx           \n"
-	"	movq             (%%r8),  %%rax  \n"
-	"	movq            8(%%r8),  %%rdx  \n"
-	"	movq             (%%r9),  %%rbx  \n"
-	"	movq            8(%%r9),  %%rcx  \n"
-	"	lock cmpxchg16b (%%rsi)          \n"
-	"	movq             %%rax,  (%%r10) \n"
-	"	movq             %%rdx, 8(%%r10) \n"
-	"	pop              %%rbx           \n"
-	:
-	: [old]  "X" (&old)
-	, [dest] "X" (&dest)
-	, [excg] "X" (&excg)
-	, [comp] "X" (&comp)
-	: "rsi", "rax", "rcx", "rdx", "r8", "r9", "r10"
+	old = comp;
+	__asm__ __volatile__
+	(
+	"	lock cmpxchg16b %1"
+	:	"+A" (old)
+	,	"+m" (*&dest)
+	:	"b" (int64_t (excg      ))
+	,	"c" (int64_t (excg >> 64))
+	:	"cc"
 	);
 
 #elif defined (_WIN32) || defined (WIN32) || defined (__WIN32__) || defined (__CYGWIN__) || defined (__CYGWIN32__)
@@ -325,8 +280,8 @@ void	Interlocked::cas (Data128 &old, volatile Data128 &dest, const Data128 &excg
 
 	#elif defined (_MSC_VER)
 
-		const int64_t  excg_lo = ((const int64_t *) &excg) [0];
-		const int64_t  excg_hi = ((const int64_t *) &excg) [1];
+		const int64_t  excg_lo = excg._data [0];
+		const int64_t  excg_hi = excg._data [1];
 
 		old = comp;
 
@@ -336,6 +291,10 @@ void	Interlocked::cas (Data128 &old, volatile Data128 &dest, const Data128 &excg
 			excg_lo,
 			reinterpret_cast <int64_t *> (&old)
 		);
+
+	#elif defined (__GNUC__)
+
+		old = __sync_val_compare_and_swap (&dest, comp, excg);
 
 	#else
 
@@ -348,9 +307,13 @@ void	Interlocked::cas (Data128 &old, volatile Data128 &dest, const Data128 &excg
 
 	#endif
 
-#elif defined (__linux__)
+#elif defined (__GNUC__)
 
 	old = __sync_val_compare_and_swap (&dest, comp, excg);
+
+#else
+
+	#error Unknown platform
 
 #endif
 }
@@ -361,16 +324,12 @@ void	Interlocked::cas (Data128 &old, volatile Data128 &dest, const Data128 &excg
 
 bool	Interlocked::Data128::operator == (const Data128 & other) const
 {
-	assert (&other != 0);
-
 	return (   _data [0] == other._data [0]
 	        && _data [1] == other._data [1]);
 }
 
 bool	Interlocked::Data128::operator != (const Data128 & other) const
 {
-	assert (&other != 0);
-
 	return (   _data [0] != other._data [0]
 	        || _data [1] != other._data [1]);
 }
@@ -388,8 +347,6 @@ bool	Interlocked::Data128::operator != (const Data128 & other) const
 
 void *	Interlocked::swap (void * volatile &dest_ptr, void *excg_ptr)
 {
-	assert (&dest_ptr != 0);
-
 	return (reinterpret_cast <void *> (
 		swap (
 			*reinterpret_cast <IntPtr volatile *> (&dest_ptr),
@@ -402,8 +359,6 @@ void *	Interlocked::swap (void * volatile &dest_ptr, void *excg_ptr)
 
 void *	Interlocked::cas (void * volatile &dest_ptr, void *excg_ptr, void *comp_ptr)
 {
-	assert (&dest_ptr != 0);
-
 	return (reinterpret_cast <void *> (
 		cas (
 			*reinterpret_cast <IntPtr volatile *> (&dest_ptr),

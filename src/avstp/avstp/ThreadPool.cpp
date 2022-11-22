@@ -69,7 +69,7 @@ ThreadPool::~ThreadPool ()
 			ThreadWorker &		worker = *worker_sptr;
 			worker.wait_for_death (100L*1000L);
 
-			worker_sptr.destroy ();
+			worker_sptr.reset ();
 		}
 	}
 }
@@ -163,7 +163,6 @@ int	ThreadPool::get_nbr_threads () const
 void	ThreadPool::enqueue_task_no_signal (avstp_TaskPtr task_ptr, void *user_data_ptr, TaskDispatcher &dispatcher)
 {
 	assert (task_ptr != 0);
-	assert (&dispatcher != 0);
 
 	TaskCell *		cell_ptr = _task_pool.take_cell (true);
 	if (cell_ptr == 0)
@@ -190,9 +189,6 @@ void	ThreadPool::signal_workers (int nbr_tasks)
 
 void	ThreadPool::wait_completion (conc::AtomicInt <int> &counter)
 {
-	assert (&counter != 0);
-
-	bool				cont_flag = true;
 	while (counter > 0)
 	{
 		TaskCell *		task_ptr = _task_queue.dequeue ();
@@ -287,8 +283,6 @@ void	ThreadPool::return_task_cell (TaskCell &cell)
 
 void	ThreadPool::execute_task (TaskData &task)
 {
-	assert (&task != 0);
-
 	task.execute ();
 }
 
