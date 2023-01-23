@@ -150,7 +150,6 @@
     <ClInclude Include="avstp\ThreadWorker.h">
       <Filter>avstp</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="..\common\fstb\SingleObj.h">
       <Filter>fstb</Filter>
     </ClInclude>
@@ -166,6 +165,7 @@
     <ClInclude Include="..\common\fstb\def.h">
       <Filter>fstb</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\AvstpFinder.cpp">
@@ -203,9 +203,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="avstp.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuild Include="..\common\AvstpWrapper.h">
       <Filter>common</Filter>
     </CustomBuild>
@@ -227,5 +224,8 @@
     <CustomBuild Include="..\common\MTSlicer.hpp">
       <Filter>common</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="avstp.rc" />
   </ItemGroup>
 </Project>
