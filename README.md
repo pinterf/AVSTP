@@ -21,7 +21,10 @@ Such plugins can use or not use the services of avstp.
     See: https://github.com/pinterf/AVSTP/issues/1
   - Move project to github
 
-Author: Firesledge (aka Cretindesalpes)
+## Author
+
+Firesledge (aka Cretindesalpes)
+
 Additional Fix by Ferenc Pintér
 
 ## Links
