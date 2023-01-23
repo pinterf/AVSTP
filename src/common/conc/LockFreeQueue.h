@@ -53,7 +53,6 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 #include "fstb/SingleObj.h"
 
 #include <cstddef>
-#include <mutex>
 
 
 
@@ -94,9 +93,6 @@ private:
 	typedef	void *	InternalType;
 
 	static const int  SL2 = (sizeof (InternalType) == 8) ? 4 : 3;
-
-	static ::std::mutex mx_lockfree_dequeue;
-	static ::std::mutex mx_lockfree_enqueue;
 
 	typedef	AtomicPtrIntPair <CellType>	SafePointer;
 
